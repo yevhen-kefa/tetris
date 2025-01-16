@@ -444,7 +444,7 @@ def main_menu():
     """permet de créer le menu principal du jeu"""
     global window_created, exit_to_menu 
 
-    if not window_created:  # Якщо вікно ще не створено
+    if not window_created:  
         cree_fenetre(widthWindow, heightWindow)
         window_created = True # met à jour le statut de la fenetre
     else:
@@ -465,7 +465,7 @@ def main_menu():
     texte(300, y1 + 50, "Play", taille=20, couleur="white", ancrage='center')
     
     # ajout du bouton 'continuer'
-    if os.path.exists("save_game.json"):
+    if os.path.exists("save_game.py"):
         rectangle(continue_x1, continue_y1, continue_x2, continue_y2, "green", "green")
         texte(300, y1 + 200, "Continue", taille=20, couleur="white", ancrage='center')
     else:
@@ -496,7 +496,6 @@ def menu_chois():
     play_bonus_x1, play_bonus_y1 = x1, y1 + 150
     play_bonus_x2, play_bonus_y2 = x2, y2 + 150
 
-    # Рисуємо підменю
     rectangle(0, 0, widthWindow - 1, heightWindow - 1, "white", "dark grey")
     rectangle(play_clasic_x1, play_clasic_y1, play_clasic_x2, play_clasic_y2, "blue", "blue")
     texte(300, y1 + 50, "Play Clasic", taille=20, couleur="white", ancrage="center")
@@ -574,7 +573,7 @@ def main_game():
                 fig_aleatoire = figures[random.randrange(0, len(figures))]  # -> str
                 current_figure = new_fig(tri_fig[fig_aleatoire], current_color)
                 print(current_figure)
-                figure_x, figure_y = 3, -1
+                figure_x, figure_y = 3, 0
                 # print(current_color)
                 # print(current_figure)
                 # print(game_board)
@@ -607,8 +606,8 @@ def start_game():
             else:
                 fig = lire_polys("polyominos.txt")
 
-            print("Режим:", "Bonus" if bon else "Classic")
-            print("Фігури:", fig)
+            print("Mode de jeu:", "Bonus" if bon else "Classic")
+            print("Figure:", fig)
             tri_fig = {f'f{i+1}': mat for i, mat in enumerate(fig)}
             figures = [f'f{i+1}' for i in range(len(tri_fig))]
             main_game()
